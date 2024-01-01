@@ -1,4 +1,4 @@
-# Documentação Técnica da API
+# Documentação Técnica do Frontend
 
 ## Introdução
 
