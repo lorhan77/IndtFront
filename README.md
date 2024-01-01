@@ -1,70 +1,155 @@
-# Getting Started with Create React App
+# Documentação Técnica da API
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introdução
 
-## Available Scripts
+Esta documentação fornece informações detalhadas sobre o Frontend da aplicação de gerenciamento de usuários. Foi desenvolvida com React.js e permite a realização de operações CRUD (Create, Read, Update, Delete) relacionadas aos usuários.
 
-In the project directory, you can run:
+### Execução Local
 
-### `npm start`
+Para executar localmente, siga os passos abaixo:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Abra o arquivo `Front`.
+2. Abra um terminal
+3. Digite o seguinte comando no terminal `npm i ` para instalar as dependências do projeto com o próprio React, Axios e Tailwind.
+4. Execute o comando `npm start`.
+5. Acesse a aplicação em [http://localhost:3000].
 
-### `npm test`
+## Endpoints
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 1. Listar Todos os Usuários
 
-### `npm run build`
+- **Método HTTP:** GET
+- **Rota:** `/usuarios`
+- **Descrição:** Retorna a lista de todos os usuários.
+- **Resposta de Exemplo:**
+```json
+[
+  {
+    "Id": 1,
+    "Nome": "John",
+    "Sobrenome": "Doe",
+    "Email": "john.doe@example.com",
+    "Senha": "hashed_password",
+    "NivelDeAcesso": administrador | comum
+  },
+  // ...
+]
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2. Obter Usuário por ID
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Método HTTP:** GET
+- **Rota:** `/usuarios/{id}`
+- **Descrição:** Retorna os detalhes de um usuário específico.
+- **Resposta de Exemplo:**
+```json
+{
+  "Id": 1,
+  "Nome": "John",
+  "Sobrenome": "Doe",
+  "Email": "john.doe@example.com",
+  "Senha": "hashed_password",
+  "NivelDeAcesso": administrador | comum
+}
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 3. Criar Usuário
 
-### `npm run eject`
+- **Método HTTP:** POST
+- **Rota:** `/usuarios`
+- **Descrição:** Cria um novo usuário.
+- **Corpo da Requisição (Exemplo):**
+```json
+{
+  "Nome": "Jane",
+  "Sobrenome": "Doe",
+  "Email": "jane.doe@example.com",
+  "Senha": "hashed_password",
+  "NivelDeAcesso": administrador | comum
+}
+```
+- **Resposta de Exemplo:**
+```json
+{
+  "Id": 2,
+  "Nome": "Jane",
+  "Sobrenome": "Doe",
+  "Email": "jane.doe@example.com",
+  "Senha": "hashed_password",
+  "NivelDeAcesso": administrador | comum
+}
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 4. Atualizar Usuário por ID
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **Método HTTP:** PUT
+- **Rota:** `/usuarios/{id}`
+- **Descrição:** Atualiza os detalhes de um usuário existente.
+- **Corpo da Requisição (Exemplo):**
+```json
+{
+  "Nome": "Updated",
+  "Sobrenome": "User",
+  "Email": "updated.user@example.com",
+  "Senha": "new_hashed_password",
+  "NivelDeAcesso": administrador | comum
+}
+```
+- **Resposta de Sucesso:** 204 No Content
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 5. Excluir Usuário por ID
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Método HTTP:** DELETE
+- **Rota:** `/usuarios/{id}`
+- **Descrição:** Exclui um usuário por ID.
+- **Resposta de Sucesso:**
+```json
+{
+  "Id": 2,
+  "Nome": "Jane",
+  "Sobrenome": "Doe",
+  "Email": "jane.doe@example.com",
+  "Senha": "hashed_password",
+  "NivelDeAcesso": administrador | comum
+}
+```
 
-## Learn More
+## Exemplos de Uso
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+A seguir estão alguns exemplos de como utilizar os endpoints da API.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Listar Todos os Usuários
 
-### Code Splitting
+```bash
+curl https://localhost:3000/usuarios
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Obter Usuário por ID
 
-### Analyzing the Bundle Size
+```bash
+curl https://localhost:3000/usuarios/1
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Criar Usuário
 
-### Making a Progressive Web App
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"Nome": "Jane", "Sobrenome": "Doe", "Email": "jane.doe@example.com", "Senha": "hashed_password", "NivelDeAcesso": administrador | comum}' https://localhost:3000/usuarios
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Atualizar Usuário por ID
 
-### Advanced Configuration
+```bash
+curl -X PUT -H "Content-Type: application/json" -d '{"Nome": "Updated", "Sobrenome": "User", "Email": "updated.user@example.com", "Senha": "new_hashed_password", "NivelDeAcesso": administrador | comum}' https://localhost:3000/usuarios/2
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Excluir Usuário por ID
 
-### Deployment
+```bash
+curl -X DELETE https://localhost:3000/usuarios/2
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Referências
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [.NET Core Documentation](https://docs.microsoft.com/en-us/dotnet/)
+- [Microsoft.AspNetCore.Mvc Namespace](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc)
