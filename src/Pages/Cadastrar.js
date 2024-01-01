@@ -3,7 +3,43 @@ import Logo from '../assets/Images/Logo.png'
 import UsuariosServices from "../services/UsuariosServices";
 
 function Cadastrar() {
-    const [formData, setFormData] = useState();
+    const [userFormData, setUserFormData] = useState();
+
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setUserFormData((prevFormData) => ({
+          ...prevFormData,
+            [name]: value,
+        }));
+      };
+
+      
+
+    const handleSubmit = async () => {
+        try {
+          const formData = {
+            ...userFormData,
+            nome: userFormData.nome,
+            sobrenome: userFormData.sobrenome,
+            email: userFormData.email,
+            senha: userFormData.senha,
+            nivelDeAcesso: userFormData.nivelDeAcesso
+          };
+          console.log(formData);
+          const response = await UsuariosServices.postUsuarios(formData);
+          console.log(response);
+         
+          
+      }catch (error) {
+        console.error(error);
+         
+      }
+    }
+
+    console.log(userFormData);
+    
+    
 
     return (
         <div className='w-full flex bg-[#58D5D3]/20'>
@@ -38,6 +74,8 @@ function Cadastrar() {
                                         <div className="mt-2 sm:col-span-2 sm:mt-0">
                                             <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[#58D5D3] sm:max-w-md">
                                                 <input
+                                                    onChange={handleChange}
+                                                    
                                                     type="text"
                                                     name="nome"
                                                     id="nome"
@@ -57,6 +95,7 @@ function Cadastrar() {
                                         <div className="mt-2 sm:col-span-2 sm:mt-0">
                                             <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[#58D5D3] sm:max-w-md">
                                                 <input
+                                                    onChange={handleChange}
                                                     type="text"
                                                     name="sobrenome"
                                                     id="sobrenome"
@@ -76,6 +115,7 @@ function Cadastrar() {
                                         <div className="mt-2 sm:col-span-2 sm:mt-0">
                                             <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[#58D5D3] sm:max-w-md">
                                                 <input
+                                                    onChange={handleChange}
                                                     type="text"
                                                     name="email"
                                                     id="email"
@@ -95,6 +135,7 @@ function Cadastrar() {
                                         <div className="mt-2 sm:col-span-2 sm:mt-0">
                                             <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[#58D5D3] sm:max-w-md">
                                                 <input
+                                                    onChange={handleChange}
                                                     type="text"
                                                     name="senha"
                                                     id="senha"
@@ -114,6 +155,7 @@ function Cadastrar() {
                                         <div className="mt-2 sm:col-span-2 sm:mt-0">
                                             <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[#58D5D3] sm:max-w-md">
                                                 <input
+                                                    onChange={handleChange}
                                                     type="text"
                                                     name="nivelDeAcesso"
                                                     id="nivelDeAcesso"
@@ -137,7 +179,9 @@ function Cadastrar() {
                                 Cancelar
                             </button>
                             <button
-                                type="submit"
+                                type="button"
+                                onClick={handleSubmit}
+                                
                                 className="inline-flex justify-center rounded-md bg-[#58D5D3] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#58D5D3] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#58D5D3]"
                             >
                                 Salvar

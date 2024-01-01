@@ -6,7 +6,7 @@ var UsuariosServices = {
         return await usuariosApi;
     },
     getAllUsuariosById: async (id) => {
-        const usuariosApi = axios.get("https://localhost:7193/Usuarios"+id);
+        const usuariosApi = axios.get("https://localhost:7193/Usuarios/"+id);
         return await usuariosApi;
     },
     postUsuarios: async (formData) => {
@@ -14,11 +14,11 @@ var UsuariosServices = {
         return await usuariosApi;
     }, 
     putUsuarios: async (id) => {
-        const usuariosApi = axios.put("https://localhost:7193/Usuarios"+id);
+        const usuariosApi = axios.put("https://localhost:7193/Usuarios/"+id);
         return await usuariosApi;
     },
     deleteUsuarios: async (id) => {
-        const usuariosApi = axios.delete("https://localhost:7193/Usuarios"+id);
+        const usuariosApi = axios.delete("https://localhost:7193/Usuarios/"+id);
         return await usuariosApi;
     }
 }
